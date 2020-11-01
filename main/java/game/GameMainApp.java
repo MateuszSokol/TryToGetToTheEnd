@@ -12,7 +12,7 @@ public class GameMainApp {
         System.out.println("Hello player, welcome to this cruel world, try to get to '*' symbol to win game," +
                 "u can only step forward or to the left or right u can't go back or neither diagonal, have fun and good luck");
         Scanner scanner = new Scanner(System.in);
-        boolean isFirstRound=true;
+        boolean isFirstRound = true;
         boolean isSecondRound;
         char[][] chars = {
                 {'O', 'O', 'O', 'O', 'O'},
@@ -31,36 +31,41 @@ public class GameMainApp {
         chars[4][4] = character.getCharacterMark();
 
 
+        System.out.println("if you want to print map just type 'm'");
+        System.out.println("If you want to go forward type '^'");
+        System.out.println("If you want to go left type '<'");
+        System.out.println("If you want to go right type '>'");
+        System.out.println("If you want to see items in equipment type 'e'");
 
-
-            System.out.println("if you want to print map just type 'm'");
-            System.out.println("If you want to go forward type '^'");
-            System.out.println("If you want to go left type '<'");
-            System.out.println("If you want to go right type '>'");
-            System.out.println("If you want to see items in equipment type 'e'");
+        while (true) {
             String command = scanner.nextLine();
+            if (command.equalsIgnoreCase("m")) {
+                map.printMap(chars);
+            }
 
-                if (command.equalsIgnoreCase("m")) {
-                    map.printMap(chars);
+            if (chars[4][4] == character.getCharacterMark() && command.equalsIgnoreCase("^")) {
+                chars[3][4] = character.getCharacterMark();
+                chars[4][4] = 'X';
+
+            } else if (chars[4][4] == character.getCharacterMark() && command.equalsIgnoreCase("<")) {
+                chars[4][3] = character.getCharacterMark();
+                chars[4][4] = 'X';
+            } else if (chars[4][4] == character.getCharacterMark() && command.equalsIgnoreCase("e")) {
+                for (int j = 0; j < equipment.size(); j++) {
+                    System.out.println(equipment.get(j));
                 }
-
-                 if (chars[4][4] == character.getCharacterMark() && command.equalsIgnoreCase("^")) {
-                    chars[3][4] = character.getCharacterMark();
-                    chars[4][4] = 'X';
-
-                } else if (chars[4][4] == character.getCharacterMark() && command.equalsIgnoreCase("<")) {
-                    chars[4][3] = character.getCharacterMark();
-                    chars[4][4] = 'X';
-                } else if (chars[4][4] == character.getCharacterMark() && command.equalsIgnoreCase("e")) {
-                    for (int j = 0; j < equipment.size(); j++) {
-                        System.out.println(equipment.get(j));
-                    }
-                } else if (equipment.isEmpty() && command.equalsIgnoreCase("e")) {
-            System.out.println("equipment is empty");
-        }
-
-
-
+            } else if (equipment.isEmpty() && command.equalsIgnoreCase("e")) {
+                System.out.println("equipment is empty");
+            } else if (character.getCharacterMark() == chars[3][4] && command.equalsIgnoreCase("^")) {
+                chars[2][4] = character.getCharacterMark();
+                chars[3][4] = 'X';
+            } else if (character.getCharacterMark() == chars[4][3] && command.equalsIgnoreCase("<")) {
+                chars[4][2] = character.getCharacterMark();
+                chars[4][3] = 'X';
+            } else if (character.getCharacterMark() == chars[3][4] && command.equalsIgnoreCase("<") || command.equalsIgnoreCase("^")) {
+                chars[3][3] = character.getCharacterMark();
+                chars[3][4] = 'X';
+            }
 
             String hpPotion = "hp+10";
             if (character.getCharacterMark() == chars[4][3]) {
@@ -70,26 +75,10 @@ public class GameMainApp {
 
             }
 
-
-
-
-
-                if (character.getCharacterMark() == chars[3][4] && command.equalsIgnoreCase("^")) {
-                    chars[2][4] = character.getCharacterMark();
-                    chars[3][4] = 'X';
-                } else if (character.getCharacterMark() == chars[4][3] && command.equalsIgnoreCase("<")) {
-                    chars[4][2] = character.getCharacterMark();
-                    chars[4][3] = 'X';
-                } else if (character.getCharacterMark() == chars[3][4] && command.equalsIgnoreCase("<") || command.equalsIgnoreCase("^")) {
-                    chars[3][3] = character.getCharacterMark();
-                    chars[3][4] = 'X';
-
-                }
-                isSecondRound=false;
-            }
-
         }
 
+    }
 
 
+}
 
