@@ -110,12 +110,16 @@ public class Character {
         try {
             for (int i = 0; i < chars.length; i++) {
                 for (int j = 0; j < chars.length; j++) {
+
                     if (chars[i][j] == currentPlayer) {
-                        chars[i][j+1] = currentPlayer;
+                        chars[i][j + 1] = currentPlayer;
                         chars[i][j] = 'X';
+                        break;
+                    }
+
                     }
                 }
-            }
+
         } catch (ArrayIndexOutOfBoundsException exception) {
             System.out.println("You can't go out map");
         }
@@ -129,8 +133,6 @@ public class Character {
                     if (chars[i][j] == currentPlayer) {
                         chars[i - 1][j] = currentPlayer;
                         chars[i][j] = 'X';
-
-                    } else if (chars[i][0] == currentPlayer) {
 
                     }
                 }
@@ -207,6 +209,7 @@ public class Character {
         int randomArrIndex = random.nextInt(chars.length);
         if (currentPlayer == chars[randomArrIndex][randomArrIndex]) {
             character.addToEquipmentHpPotion(character);
+            return;
         }
 
     }
@@ -216,6 +219,7 @@ public class Character {
         int randomArrIndex = random.nextInt(chars.length);
         if (currentPlayer == chars[randomArrIndex][randomArrIndex]) {
             character.addToEquipmentMpPotion(character);
+            return;
         }
 
     }
@@ -225,6 +229,7 @@ public class Character {
         int randomArrIndex = random.nextInt(chars.length);
         if (currentPlayer == chars[randomArrIndex][randomArrIndex]) {
             character.addToEquipmentStrPotion(character);
+            return;
         }
     }
 
@@ -233,6 +238,7 @@ public class Character {
         int randomArrIndex = random.nextInt(chars.length);
         if (currentPlayer == chars[randomArrIndex][randomArrIndex]) {
             character.addToEquipmentDefPotion(character);
+            return;
         }
     }
 
@@ -241,6 +247,7 @@ public class Character {
         int randomArrIndex = random.nextInt(chars.length);
         if (currentPlayer == chars[randomArrIndex][randomArrIndex]) {
             character.addToEquipmentLargeHpPotion(character);
+            return;
         }
     }
 
@@ -249,6 +256,7 @@ public class Character {
         int randomArrIndex = random.nextInt(chars.length);
         if (currentPlayer == chars[randomArrIndex][randomArrIndex]) {
             character.addToEquipmentLargeMpPotion(character);
+            return;
         }
     }
 }

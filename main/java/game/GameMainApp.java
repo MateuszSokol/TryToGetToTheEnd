@@ -60,15 +60,24 @@ public class GameMainApp {
             } else if (command.equalsIgnoreCase("quit")) {
 
                 isStart = false;
-            } else if (character.getCharacterMark() == chars[0][0]) {
-                System.out.println("you have won");
-                isStart = false;
-            }else if (command.equalsIgnoreCase("s")){
+            }
+            else if (command.equalsIgnoreCase("s")){
                 character.characterShowStats(character);
             }
+            character.foundedDefPotion(character,currentPlayer,chars);
+            character.foundedMpPotion(character,currentPlayer,chars);
+            character.foundedLargeMpPotion(character,currentPlayer,chars);
+            character.foundedHpPotion(character,currentPlayer,chars);
+            character.foundedLargeHpPotion(character,currentPlayer,chars);
+            character.foundedStrPotion(character,currentPlayer,chars);
 
 
 
+
+if (chars[0][0]==currentPlayer){
+    isStart=false;
+    System.out.println("You have won congratulation");
+}
         }
 
 
