@@ -1,6 +1,7 @@
 package game;
 
 import game.characters.Character;
+import game.items.Potions;
 import game.map.Map;
 
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class GameMainApp {
                 {'O', 'O', 'O', 'O', 'O'},
                 {'O', 'O', 'O', 'O', 'O'},
         };
-        List<String> equipment = new ArrayList<>();
+        List<Potions> equipment = new ArrayList<>();
 
 
         Map map = new Map();
@@ -56,6 +57,7 @@ public class GameMainApp {
                 character.showMap(chars);
             } else if (command.equalsIgnoreCase("e")) {
                 character.showEq();
+                System.out.println("If u want to use any items in eq u must type its name like 'hp'");
 
             } else if (command.equalsIgnoreCase("quit")) {
 
@@ -64,12 +66,10 @@ public class GameMainApp {
             else if (command.equalsIgnoreCase("s")){
                 character.characterShowStats(character);
             }
-            character.foundedDefPotion(character,currentPlayer,chars);
-            character.foundedMpPotion(character,currentPlayer,chars);
-            character.foundedLargeMpPotion(character,currentPlayer,chars);
-            character.foundedHpPotion(character,currentPlayer,chars);
-            character.foundedLargeHpPotion(character,currentPlayer,chars);
-            character.foundedStrPotion(character,currentPlayer,chars);
+
+
+            character.findAnyPotion(chars,currentPlayer);
+            character.useItemsInEquipment(character,command);
 
 
 

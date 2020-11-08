@@ -1,7 +1,5 @@
 package game.map;
 
-import game.items.Potions;
-
 public class Map {
 
     public void printMap(char[][] map) {
@@ -20,9 +18,6 @@ int length =map.length;
             }
             System.out.println();
         }
-
-    }
-    public void addTreasure(char currentPlayer, char[][] chars){
 
     }
 

@@ -3,7 +3,6 @@ package game.characters;
 import game.items.Potions;
 import game.map.Map;
 
-import java.lang.reflect.Array;
 import java.util.List;
 import java.util.Random;
 
@@ -14,10 +13,10 @@ public class Character {
     public int def;
     public boolean isMale;
     public char characterMark;
-    public List<String> equipment;
+    public List<Potions> equipment;
 
 
-    public Character(int hp, int mp, int str, int def, boolean isMale, char characterMark, List<String> equipment) {
+    public Character(int hp, int mp, int str, int def, boolean isMale, char characterMark, List<Potions> equipment) {
         this.hp = hp;
         this.mp = mp;
         this.str = str;
@@ -81,11 +80,11 @@ public class Character {
         return this;
     }
 
-    public List<String> getEquipment() {
+    public List<Potions> getEquipment() {
         return equipment;
     }
 
-    public Character setEquipment(List<String> equipment) {
+    public Character setEquipment(List<Potions> equipment) {
         this.equipment = equipment;
         return this;
     }
@@ -105,6 +104,7 @@ public class Character {
             System.out.println("You can't go out map");
         }
     }
+    //stworzyc enum direction
 
     public void characterPerformMoveRight(char[][] chars, char currentPlayer) throws ArrayIndexOutOfBoundsException {
         try {
@@ -117,8 +117,8 @@ public class Character {
                         break;
                     }
 
-                    }
                 }
+            }
 
         } catch (ArrayIndexOutOfBoundsException exception) {
             System.out.println("You can't go out map");
@@ -160,43 +160,6 @@ public class Character {
         }
     }
 
-    public void addToEquipmentHpPotion(Character character) {
-        Potions potions = new Potions();
-        character.equipment.add(potions.getHpPotion());
-        System.out.println("You have got hpPotion");
-
-    }
-
-    public void addToEquipmentLargeHpPotion(Character character) {
-        Potions potions = new Potions();
-        character.equipment.add(potions.getLargeHpPotion());
-        System.out.println("You have got largeHpPotion");
-    }
-
-    public void addToEquipmentMpPotion(Character character) {
-        Potions potions = new Potions();
-        character.equipment.add(potions.getMpPotion());
-        System.out.println("You have got mpPotion");
-    }
-
-    public void addToEquipmentLargeMpPotion(Character character) {
-        Potions potions = new Potions();
-        character.equipment.add(potions.getLargeMpPotion());
-        System.out.println("You have got largeMpPotion");
-    }
-
-    public void addToEquipmentStrPotion(Character character) {
-        Potions potions = new Potions();
-        character.equipment.add(potions.getStrPotion());
-        System.out.println("You have got strPotion");
-    }
-
-    public void addToEquipmentDefPotion(Character character) {
-        Potions potions = new Potions();
-        character.equipment.add(potions.getDefPotion());
-        System.out.println("You have got defPotion");
-    }
-
     public void characterShowStats(Character character) {
         System.out.println("Your HP: " + character.getHp());
         System.out.println("Your MP: " + character.getMp());
@@ -204,59 +167,70 @@ public class Character {
         System.out.println("Your DEF: " + character.getDef());
     }
 
-    public void foundedHpPotion(Character character, char currentPlayer, char[][] chars) {
+    public static int getRandomValue(int upperRange) {
         Random random = new Random();
-        int randomArrIndex = random.nextInt(chars.length);
-        if (currentPlayer == chars[randomArrIndex][randomArrIndex]) {
-            character.addToEquipmentHpPotion(character);
-            return;
+
+
+        return random.nextInt(upperRange);
+    }
+
+    public void findAnyPotion(char[][] chars, char currentPlayer) {
+
+        int range = chars.length;
+
+
+        if (chars[getRandomValue(range)][getRandomValue(range)] == currentPlayer) {
+            equipment.add(Potions.defPotion);
+            System.out.println("Def Potion added to your equipment");
+
+        } else if (chars[getRandomValue(range)][getRandomValue(range)] == currentPlayer) {
+            equipment.add(Potions.hpPotion);
+            System.out.println("Hp Potion added to your equipment");
+        } else if (chars[getRandomValue(range)][getRandomValue(range)] == currentPlayer) {
+            equipment.add(Potions.largeHpPotion);
+            System.out.println("Large HpPotion added to your equipment");
+        } else if (chars[getRandomValue(range)][getRandomValue(range)] == currentPlayer) {
+            equipment.add(Potions.mpPotion);
+            System.out.println("Mp Potion added to your equipment");
+        } else if (chars[getRandomValue(range)][getRandomValue(range)] == currentPlayer) {
+            equipment.add(Potions.largeMpPotion);
+            System.out.println("Large MpPotion added to your equipment");
+        } else if (chars[getRandomValue(range)][getRandomValue(range)] == currentPlayer) {
+            equipment.add(Potions.strPotion);
+            System.out.println("Str Potion added to your equipment");
         }
+
 
     }
 
-    public void foundedMpPotion(Character character, char currentPlayer, char[][] chars) {
-        Random random = new Random();
-        int randomArrIndex = random.nextInt(chars.length);
-        if (currentPlayer == chars[randomArrIndex][randomArrIndex]) {
-            character.addToEquipmentMpPotion(character);
-            return;
-        }
+    public void useItemsInEquipment(Character character, String command) {
+        if (equipment.contains(Potions.defPotion) && command.equalsIgnoreCase("def")) {
+            character.setDef(def + 10);
+            equipment.remove(Potions.defPotion);
+            System.out.println("def+10");
+        } else if (equipment.contains(Potions.hpPotion) && command.equalsIgnoreCase("hp")) {
+            character.setHp(hp + 20);
+            equipment.remove(Potions.hpPotion);
+            System.out.println("hp+20");
+        } else if (equipment.contains(Potions.largeHpPotion) && command.equalsIgnoreCase("LargeHp")) {
+            character.setHp(hp + 40);
+            equipment.remove(Potions.largeHpPotion);
+            System.out.println("hp+40");
+        } else if (equipment.contains(Potions.mpPotion) && command.equalsIgnoreCase("mp")) {
+            character.setMp(mp + 20);
+            equipment.remove(Potions.mpPotion);
+            System.out.println("mp+20");
+        }else if (equipment.contains(Potions.largeMpPotion)&&command.equalsIgnoreCase("LargeMp")){
+            character.setMp(mp+40);
+            equipment.remove(Potions.largeMpPotion);
+            System.out.println("mp+40");
 
-    }
-
-    public void foundedStrPotion(Character character, char currentPlayer, char[][] chars) {
-        Random random = new Random();
-        int randomArrIndex = random.nextInt(chars.length);
-        if (currentPlayer == chars[randomArrIndex][randomArrIndex]) {
-            character.addToEquipmentStrPotion(character);
-            return;
-        }
-    }
-
-    public void foundedDefPotion(Character character, char currentPlayer, char[][] chars) {
-        Random random = new Random();
-        int randomArrIndex = random.nextInt(chars.length);
-        if (currentPlayer == chars[randomArrIndex][randomArrIndex]) {
-            character.addToEquipmentDefPotion(character);
-            return;
-        }
-    }
-
-    public void foundedLargeHpPotion(Character character, char currentPlayer, char[][] chars) {
-        Random random = new Random();
-        int randomArrIndex = random.nextInt(chars.length);
-        if (currentPlayer == chars[randomArrIndex][randomArrIndex]) {
-            character.addToEquipmentLargeHpPotion(character);
-            return;
+        }else if (equipment.contains(Potions.strPotion)&&command.equalsIgnoreCase("str")){
+            character.setStr(str+10);
+            equipment.remove(Potions.strPotion);
+            System.out.println("str+10");
         }
     }
 
-    public void foundedLargeMpPotion(Character character, char currentPlayer, char[][] chars) {
-        Random random = new Random();
-        int randomArrIndex = random.nextInt(chars.length);
-        if (currentPlayer == chars[randomArrIndex][randomArrIndex]) {
-            character.addToEquipmentLargeMpPotion(character);
-            return;
-        }
-    }
+
 }
